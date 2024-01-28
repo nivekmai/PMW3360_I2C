@@ -1,14 +1,12 @@
-# PMW3360 Module Library for Arduino
+# PMW3360 I2C Interface
 
-This library allows an Arduino board to easily communicate with PMW3360 Module.
-This library is designed for https://www.tindie.com/products/jkicklighter/pmw3360-motion-sensor/
-However, other setup will also work (e.g., https://easyeda.com/Justice/New_Project-cc5450b338fd4d55bef91ec37025ab6a).
+Implementation of [SunjunKim's PMW3360 library](https://github.com/SunjunKim/PMW3360) to send the data over I2C (acting as an I2C target sending mouse data to the controller).
 
-For the most basic example, please take look at [basic_polling] example.
-[basic_interrupt] example is using movement interrupt pin (MT) on the module. It does SPI transmission only if any movement is detects.
-[HID_mouse] example will work as a regular mouse with left/right buttons.
+The code is designed for Arduino style microcontrollers and tested on a seeeduino xiao.
 
 # PMW3360 class
+Notice: The PMW3360 class is from https://github.com/SunjunKim/PMW3360, which is based on https://github.com/mrjohnk/PMW3360DM-T2QU
+
 * void begin(unsigned int ss_pin, unsigned int CPI = 800)
   * Initialize the sensor. ss_pin is Slave Select pin on the module. Optionally CPI value can be set.
 * void setCPI(unsigned int newCPI); / unsigned int getCPI();
@@ -32,14 +30,10 @@ For the most basic example, please take look at [basic_polling] example.
   * Read register value from the module.
 * void writeReg(byte reg_addr, byte data);
   * Write register value to the module.
-
-
-Notice: some part of the code is based on https://github.com/mrjohnk/PMW3360DM-T2QU
-Disclaimer: This is not a PixArt official library. USE AT YOUR OWN RISK.
-
+ 
 # License
 
-Copyright (c) Sunjun Kim. All right reserved.
+Copyright (c) Kevin Christensen. All right reserved.
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -58,12 +52,3 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 # Update log
 * v1.0.0
   * Initial release
-
-* v1.0.1
-  * Bug fix on register reading (timing stabilized)
-  * Sensor initialization check routine added. (begin() will return false if failed)
-
-* v1.1.0
-  * Raw frame capture functions are updated (prepareImage, readImagePixel, endImage).
-  * 'Camera' example is added
-
